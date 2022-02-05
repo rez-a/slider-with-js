@@ -4,5 +4,5 @@ new SLIDER({
     currentSlider: (slider) => {
         console.log(slider)
     },
-    auto: 3000
+    auto: 2000 //ms
 })

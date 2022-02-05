@@ -6,6 +6,7 @@ class SLIDER {
         this.createNextAndPrevBtns();
         this.createDots();
         this.showSlides(this.slideIndex);
+        this.setInterval();
     }
 
     initialStuff() {
@@ -32,14 +33,17 @@ class SLIDER {
     }
     previousSlide = (e) => {
         e.preventDefault()
+        this.resetInterval();
         this.showSlides(this.slideIndex -= 1)
     }
     nextSlide = (e) => {
         e.preventDefault()
+        this.resetInterval();
         this.showSlides(this.slideIndex += 1)
     }
     currentSlider = n => {
         this.slideIndex = n;
+        this.resetInterval();
         this.showSlides(this.slideIndex)
     }
     createDots() {
@@ -52,11 +56,7 @@ class SLIDER {
         dots.innerHTML = dotElements.join('');
         elementSlider.after(dots);
 
-
-        dots.querySelectorAll('.dot').forEach(dot => dot.addEventListener('click', e => {
-
-            this.currentSlider(e.target.dataset.slider)
-        }))
+        dots.querySelectorAll('.dot').forEach(dot => dot.addEventListener('click', e => { this.currentSlider(e.target.dataset.slider) }))
     }
     showSlides(index) {
         let { elm: elementSlider, slideClass, currentSlider } = this.options;
@@ -67,6 +67,18 @@ class SLIDER {
         this.dotsElements.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
 
         this.sliders[this.slideIndex - 1].classList.add('active');
+        currentSlider(this.sliders[this.slideIndex - 1]);
         this.dotsElements.children[this.slideIndex - 1].classList.add('active');
+    }
+    setInterval() {
+        if (this.auto !== 0) {
+            this.interval = setInterval(() => {
+                this.showSlides(this.slideIndex += 1);
+            }, this.auto);
+        }
+    }
+    resetInterval() {
+        clearInterval(this.interval);
+        this.setInterval();
     }
 }
