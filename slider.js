@@ -5,7 +5,7 @@ class SLIDER {
         this.initialStuff();
         this.createNextAndPrevBtns();
         this.createDots();
-        this.showSlides(1);
+        this.showSlides(this.slideIndex);
     }
 
     initialStuff() {
@@ -38,23 +38,35 @@ class SLIDER {
         e.preventDefault()
         this.showSlides(this.slideIndex += 1)
     }
-
+    currentSlider = n => {
+        this.slideIndex = n;
+        this.showSlides(this.slideIndex)
+    }
     createDots() {
         let { elm: elementSlider } = this.options;
         let dotElements = [...this.sliders].map((slider, index) => `<div class="dot m-1" data-slider="${index+1}"></div>`);
 
         let dots = document.createElement('div');
+        this.dotsElements = dots;
         dots.className = 'dots d-flex mx-auto justify-content-center mt-2';
         dots.innerHTML = dotElements.join('');
         elementSlider.after(dots);
-        dots.addEventListener('click', function(e) {
-            if (e.target.classList.contains('dot')) {
-                console.log(e.target.dataset.slider)
-            }
-        })
+
+
+        dots.querySelectorAll('.dot').forEach(dot => dot.addEventListener('click', e => {
+
+            this.currentSlider(e.target.dataset.slider)
+        }))
     }
-    showSlides(number) {
-        if (number > this.sliders.length) this.slideIndex = 1;
-        if (number < 1) this.slideIndex = this.sliders.length;
+    showSlides(index) {
+        let { elm: elementSlider, slideClass, currentSlider } = this.options;
+        if (index > this.sliders.length) this.slideIndex = 1;
+        if (index < 1) this.slideIndex = this.sliders.length;
+
+        elementSlider.querySelector(`.${slideClass}.active`).classList.remove('active');
+        this.dotsElements.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+
+        this.sliders[this.slideIndex - 1].classList.add('active');
+        this.dotsElements.children[this.slideIndex - 1].classList.add('active');
     }
 }

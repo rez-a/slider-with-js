@@ -6,6 +6,9 @@ body {
 .slider {
     position: relative;
     display: none;
+    animation-name: fade;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
 }
 
 .slider.active {
@@ -60,4 +63,13 @@ body {
 .sliders .btns a {
     font-size: 20px;
     color: black;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
