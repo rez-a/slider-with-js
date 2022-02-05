@@ -37,6 +37,12 @@ body {
     border-radius: 50px;
     background-color: #C2C2C1;
     cursor: pointer;
+    transition: all 0.5s;
+}
+
+.dot:hover,
+.dot.active {
+    background-color: #868684;
 }
 
 .sliders {
