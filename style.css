@@ -1,0 +1,53 @@
+body {
+    font-family: 'Vazir', sans-serif;
+    background-color: #26355A;
+}
+
+.slider {
+    position: relative;
+    display: none;
+}
+
+.slider .badge,
+.slider .text {
+    position: absolute;
+}
+
+.slider .badge {
+    left: 0;
+    top: 0;
+    background-color: rgba(38, 53, 90, 0.5);
+    border-radius: 0;
+}
+
+.slider .text {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #C2C2C1;
+    cursor: pointer;
+}
+
+.sliders {
+    position: relative;
+}
+
+.sliders .btns {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    transform: translate( 0, -50%);
+}
+
+.sliders .btns a {
+    font-size: 20px;
+    color: black;
+}
