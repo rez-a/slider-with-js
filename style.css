@@ -8,6 +8,10 @@ body {
     display: none;
 }
 
+.slider.active {
+    display: block;
+}
+
 .slider .badge,
 .slider .text {
     position: absolute;
